@@ -29,28 +29,35 @@ class _OutputViewState extends State<OutputView> {
           itemBuilder: (context, index) {
             var fname = lstStudents![index].fname!;
             var lname = lstStudents![index].lname!;
-            return ListTile(
-              leading: const Icon(Icons.person),
-              title: Text('$fname $lname'),
-              subtitle: Text(lstStudents![index].address!),
-              trailing: Wrap(children: [
-                const SizedBox(
-                  width: 20,
-                ),
-                IconButton(
-                    onPressed: () {
-                      lstStudents!.removeAt(index);
-                    },
-                    icon: const Icon(Icons.delete)),
-                const SizedBox(
-                  width: 20,
-                ),
-                IconButton(
-                    onPressed: () {
-                      Navigator.popAndPushNamed(context, '/editstudent');
-                    },
-                    icon: const Icon(Icons.edit)),
-              ]),
+            return GestureDetector(
+              onDoubleTap: () {
+                setState(() {
+                  lstStudents!.removeAt(index);
+                });
+              },
+              child: ListTile(
+                leading: const Icon(Icons.person),
+                title: Text('$fname $lname'),
+                subtitle: Text(lstStudents![index].address!),
+                trailing: Wrap(children: [
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  IconButton(
+                      onPressed: () {
+                        lstStudents!.removeAt(index);
+                      },
+                      icon: const Icon(Icons.delete)),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  IconButton(
+                      onPressed: () {
+                        Navigator.popAndPushNamed(context, '/editstudent');
+                      },
+                      icon: const Icon(Icons.edit)),
+                ]),
+              ),
             );
           },
         ));
